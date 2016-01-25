@@ -7,16 +7,16 @@ export SCRIPTS=$ABS/dataset
 export SPLITS=$ABS/dataset
 export UNK=5
 
-echo "Step 1: Construct the title-article pairs from gigaword"
-mkdir -p $WORK
-find $AGIGA/*/data/*/*.gz | parallel --gnu --progress -j $THREADS python2.7 $SCRIPTS/process_giga4.py \{\} $WORK
+#echo "Step 1: Construct the title-article pairs from gigaword"
+#mkdir -p $WORK
+#find $AGIGA/*/data/*/*.gz | parallel --gnu --progress -j $THREADS python2.7 $SCRIPTS/process_giga4.py \{\} $WORK
 
-exit 0;
+#exit 0;
 echo "Step 2: Compile the data into train/dev/test."
 cd $WORK
-cat $SPLITS/train.splits | xargs cat > train.data.txt
-cat $SPLITS/valid.splits | xargs cat > valid.data.txt
-cat $SPLITS/test.splits  | xargs cat > test.data.txt
+cat $SPLITS/train.splits | xargs cat > train.data.txt 2>/dev/null
+cat $SPLITS/valid.splits | xargs cat > valid.data.txt 2>/dev/null
+cat $SPLITS/test.splits  | xargs cat > test.data.txt 2>/dev/null
 
 
 echo "Step 3: Basic filtering on train/dev."
